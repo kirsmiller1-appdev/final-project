@@ -1,0 +1,118 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      List of all user ratings
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Add a new user rating
+    </h2>
+
+    <form action="/insert_user_rating" method="post">
+      <div class="form-group">
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="user_id_from_query" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="wine_id_box">
+          Wine
+        </label>
+
+        <input type="text" id="wine_id_box" name="wine_id_from_query" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="rating_box">
+          Rating
+        </label>
+
+        <input type="text" id="rating_box" name="rating_from_query" class="form-control">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Create user rating
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Wine
+        </th>
+
+        <th>
+          Rating
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @user_ratings.each do |user_rating| %>
+      <tr>
+        <td>
+          <%= user_rating.id %>
+        </td>
+
+        <td>
+          <%= user_rating.user_id %>
+        </td>
+
+        <td>
+          <%= user_rating.wine_id %>
+        </td>
+
+        <td>
+          <%= user_rating.rating %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(user_rating.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(user_rating.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/user_ratings/<%= user_rating.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
