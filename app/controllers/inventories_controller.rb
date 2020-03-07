@@ -13,12 +13,22 @@ class InventoriesController < ApplicationController
   end
 
   def create
+    @wine = Wine.new
+    @wine.vintage = params.fetch("vintage_from_query")
+    @wine.vineyard = params.fetch("vineyard_from_query")
+    @wine.blend = params.fetch("blend_from_query")
+
+    if @wine.valid?
+      @wine.save
+    else
+      redirect_to("/inventories", { :notice => "Wine failed to create successfully." })
+    end
+
     @inventory = Inventory.new
-    @inventory.wine_id = params.fetch("wine_id_from_query")
-    @inventory.owner_id = params.fetch("owner_id_from_query")
-    @inventory.location = params.fetch("location_from_query")
+    @inventory.wine_id = @wine.id
+    @inventory.owner_id = @current_user.id
+    @inventory.location = @current_user.location
     @inventory.price = params.fetch("price_from_query")
-    @inventory.end_date = params.fetch("end_date_from_query")
 
     if @inventory.valid?
       @inventory.save
