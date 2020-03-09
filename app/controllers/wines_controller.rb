@@ -5,6 +5,27 @@ class WinesController < ApplicationController
     render({ :template => "wines/index.html.erb" })
   end
 
+  def index_vintage
+    vintage_search = params.fetch("vintage_from_path")
+    @wines = Wine.where({ :vintage => vintage_search }).all.order({ :created_at => :desc })
+
+    render({ :template => "wines/vintage.html.erb" })
+  end
+
+  def index_vineyard
+    vineyard_search = params.fetch("vineyard_from_path")
+    @wines = Wine.where({ :vineyard => vineyard_search }).all.order({ :created_at => :desc })
+
+    render({ :template => "wines/vineyard.html.erb" })
+  end
+
+  def index_blend
+    blend_search = params.fetch("blend_from_path")
+    @wines = Wine.where({ :blend => blend_search }).all.order({ :created_at => :desc })
+
+    render({ :template => "wines/blend.html.erb" })
+  end
+
   def show
     the_id = params.fetch("id_from_path")
     @wine = Wine.where({:id => the_id }).at(0)
