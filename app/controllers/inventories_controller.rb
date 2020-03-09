@@ -5,6 +5,18 @@ class InventoriesController < ApplicationController
     render({ :template => "inventories/index.html.erb" })
   end
 
+  def index_chicago
+    @inventories = Inventory.where({ :location => "Chicago" }).all.order({ :created_at => :desc })
+
+    render({ :template => "inventories/chicago.html.erb" })
+  end
+
+  def index_sf
+    @inventories = Inventory.where({ :location => "SF" }).all.order({ :created_at => :desc })
+
+    render({ :template => "inventories/sf.html.erb" })
+  end
+
   def show
     the_id = params.fetch("id_from_path")
     @inventory = Inventory.where({:id => the_id }).at(0)

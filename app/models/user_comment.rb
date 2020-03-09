@@ -15,4 +15,10 @@ class UserComment < ApplicationRecord
   belongs_to :commented_wine, :class_name => "Wine", :foreign_key => "wine_id"
   validates :wine_id, :presence => true
   validates :user_id, :presence => true
+
+  def commenter_name
+    commenter = User.where({ :id => user_id }).at(0)
+    name = commenter.first_name
+    return name
+  end    
 end

@@ -88,6 +88,9 @@ Rails.application.routes.draw do
   
   match("/inventories/:id_from_path", { :controller => "inventories", :action => "show", :via => "get"})
   
+  match("/chicago", { :controller => "inventories", :action => "index_chicago", :via => "get"})
+  match("/sf", { :controller => "inventories", :action => "index_sf", :via => "get"})
+
   # UPDATE
   
   match("/modify_inventory/:id_from_path", { :controller => "inventories", :action => "update", :via => "post"})
