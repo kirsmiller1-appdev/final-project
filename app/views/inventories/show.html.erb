@@ -23,14 +23,28 @@
         Wine
       </dt>
       <dd>
-        <%= @inventory.wine_id %>
+        <%= @wine.vintage %> <%= @wine.vineyard %> <%= @wine.blend %>
+      </dd>
+
+      <dt>
+        Tags
+      </dt>
+      <dd>
+        <%= @tags.to_sentence %>
+      </dd>
+
+      <dt>
+        Average rating
+      </dt>
+      <dd>
+        <%= @avg_rating %>
       </dd>
 
       <dt>
         Owner
       </dt>
       <dd>
-        <%= @inventory.owner_id %>
+        <%= @owner.first_name %>
       </dd>
 
       <dt>
@@ -47,26 +61,16 @@
         <%= @inventory.price %>
       </dd>
 
+      <% if @inventory.end_date != nil %>
       <dt>
-        End date
+        Drank on
       </dt>
       <dd>
         <%= @inventory.end_date %>
       </dd>
+      <% else %>
+      <%end%>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@inventory.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@inventory.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>

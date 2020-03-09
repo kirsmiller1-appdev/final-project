@@ -8,6 +8,14 @@ class InventoriesController < ApplicationController
   def show
     the_id = params.fetch("id_from_path")
     @inventory = Inventory.where({:id => the_id }).at(0)
+    wine_id = @inventory.fetch(:wine_id)
+    @wine = Wine.where({:id => wine_id}).at(0)
+    owner_id = @inventory.fetch(:owner_id)
+    @owner = User.where({ :id => owner_id }).at(0)
+    @tags = Tag.where({ :wine_id => wine_id }).pluck(:tag)
+    
+    ratings = UserRating.where({ :wine_id => wine_id }).pluck(:rating)
+    @avg_rating = ratings.reduce(:+) / ratings.size.to_f
 
     render({ :template => "inventories/show.html.erb" })
   end
