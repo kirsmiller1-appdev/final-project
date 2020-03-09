@@ -31,7 +31,7 @@ class TagsController < ApplicationController
     @tag = Tag.where({ :id => the_id }).at(0)
 
     @tag.wine_id = params.fetch("wine_id_from_query")
-    @tag.user_id = params.fetch("user_id_from_query")
+    @tag.user_id = @current_user.id
     @tag.tag = params.fetch("tag_from_query")
 
     if @tag.valid?

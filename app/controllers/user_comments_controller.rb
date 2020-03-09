@@ -14,7 +14,7 @@ class UserCommentsController < ApplicationController
 
   def create
     @user_comment = UserComment.new
-    @user_comment.user_id = params.fetch("user_id_from_query")
+    @user_comment.user_id = @current_user.id
     @user_comment.wine_id = params.fetch("wine_id_from_query")
     @user_comment.comment = params.fetch("comment_from_query")
 
@@ -30,7 +30,7 @@ class UserCommentsController < ApplicationController
     the_id = params.fetch("id_from_path")
     @user_comment = UserComment.where({ :id => the_id }).at(0)
 
-    @user_comment.user_id = params.fetch("user_id_from_query")
+    @user_comment.user_id = @current_user.id
     @user_comment.wine_id = params.fetch("wine_id_from_query")
     @user_comment.comment = params.fetch("comment_from_query")
 

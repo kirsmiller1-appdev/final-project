@@ -14,7 +14,7 @@ class FollowRequestsController < ApplicationController
 
   def create
     @follow_request = FollowRequest.new
-    @follow_request.sender_id = params.fetch("sender_id_from_query")
+    @follow_request.sender_id = @current_user.id
     @follow_request.leader_id = params.fetch("leader_id_from_query")
     @follow_request.status = params.fetch("status_from_query")
 
