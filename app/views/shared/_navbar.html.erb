@@ -10,24 +10,29 @@
 
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Wines
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/inventories" class="dropdown-item">
-              Inventory
-            </a>
-          </div>
-        </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Wines
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/inventories">All inventory</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/chicago">Chicago</a>
+          <a class="dropdown-item" href="/sf">SF</a>
+        </div>
+      </li>
       </ul>
       <ul class="navbar-nav mr-auto">
         <% if @current_user != nil %>
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
-          </a>
-          <li class="dropdown-menu"><a class="dropdown-item" href="/edit_user_profile">Edit profile</a></li>
-          <li class="dropdown-menu"><a class="dropdown-item" href="/user_sign_out">Sign out</a></li>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/edit_user">Edit profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/user_sign_out">Sign out</a>
+        </div>
         <% else %>
         <% end %>
       </ul>
