@@ -13,15 +13,27 @@ class InventoriesController < ApplicationController
   end
 
   def create
-    @wine = Wine.new
-    @wine.vintage = params.fetch("vintage_from_query")
-    @wine.vineyard = params.fetch("vineyard_from_query")
-    @wine.blend = params.fetch("blend_from_query")
-
-    if @wine.valid?
-      @wine.save
-    else
-      redirect_to("/inventories", { :notice => "Wine failed to create successfully." })
+    ## check whether the wine exists in the wine table
+    wine_check_vintage = params.fetch("vintage_from_query")
+    wine_check_vineyard = params.fetch("vineyard_from_query")
+    wine_check_blend = params.fetch("blend_from_query")
+    wine_check = Wine.where({ :vintage => wine_check_vintage }).where({ :vineyard => wine_check_vineyard}).where({ :blend => wine_check_blend})
+    
+    if wine_check.any?
+    ## if exists, then match it to that wine_id
+      @wine = wine_check.at(0)
+    ## if not, create a new one
+    else 
+      @wine = Wine.new
+      @wine.vintage = params.fetch("vintage_from_query")
+      @wine.vineyard = params.fetch("vineyard_from_query")
+      @wine.blend = params.fetch("blend_from_query")
+      
+      if @wine.valid?
+        then @wine.save
+      else
+        redirect_to("/inventories", { :notice => "Wine failed to create successfully." })
+      end
     end
 
     @inventory = Inventory.new
