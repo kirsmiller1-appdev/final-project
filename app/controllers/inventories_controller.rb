@@ -17,6 +17,8 @@ class InventoriesController < ApplicationController
     ratings = UserRating.where({ :wine_id => wine_id }).pluck(:rating)
     @avg_rating = ratings.reduce(:+) / ratings.size.to_f
 
+    @comments = UserComment.where({ :wine_id => wine_id })
+
     render({ :template => "inventories/show.html.erb" })
   end
 

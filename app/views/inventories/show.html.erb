@@ -29,20 +29,6 @@
         </dd>
 
         <dt>
-          Tags
-        </dt>
-        <dd>
-          <%= @tags.to_sentence %>
-        </dd>
-
-        <dt>
-          Average rating
-        </dt>
-        <dd>
-          <%= @avg_rating %>
-        </dd>
-
-        <dt>
           Owner
         </dt>
         <dd>
@@ -72,6 +58,50 @@
         </dd>
         <% else %>
         <%end%>
+
+        <dt>
+          Tags
+        </dt>
+        <dd>
+          <%= @tags.to_sentence %>
+        </dd>
+
+        <dt>
+          Average rating
+        </dt>
+        <dd>
+          <%= @avg_rating %>
+        </dd>
+
+        <dt>
+          Comments
+        </dt>
+        <dd>
+          <table class="table">
+          <tr>
+            <th>
+              User
+            </th>
+
+            <th>
+              Comment
+            </th>
+          </tr>
+          
+          <% @comments.each do |comment| %>
+          <tr>
+            <td>
+              <%= comment.user_id %>
+            </td>
+            <td>
+              <%= comment.comment %>
+            </td>
+            <% end %>
+          </tr>
+          </table>
+        </dd>
+        
+        
 
       </dl>
     </div>
