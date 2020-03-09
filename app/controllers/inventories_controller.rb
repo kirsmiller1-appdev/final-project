@@ -76,6 +76,19 @@ class InventoriesController < ApplicationController
     end
   end
 
+  def remove
+    the_id = params.fetch("id_from_path")
+    @inventory = Inventory.where({ :id => the_id }).at(0)
+    @inventory.end_date = Date.today
+
+    if @inventory.valid?
+      @inventory.save
+      redirect_to("/inventories/#{@inventory.id}", { :notice => "Inventory updated successfully."} )
+    else
+      redirect_to("/inventories/#{@inventory.id}", { :alert => "Inventory failed to update successfully." })
+    end
+  end
+
   def destroy
     the_id = params.fetch("id_from_path")
     @inventory = Inventory.where({ :id => the_id }).at(0)

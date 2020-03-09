@@ -91,6 +91,9 @@ Rails.application.routes.draw do
   # UPDATE
   
   match("/modify_inventory/:id_from_path", { :controller => "inventories", :action => "update", :via => "post"})
+
+  # REMOVE FROM INVENTORY 
+  match("/remove_inventory/:id_from_path", { :controller => "inventories", :action => "remove", :via => "get"})
   
   # DELETE
   match("/delete_inventory/:id_from_path", { :controller => "inventories", :action => "destroy", :via => "get"})
