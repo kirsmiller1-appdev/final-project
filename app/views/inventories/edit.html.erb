@@ -1,0 +1,55 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit inventory
+    </h2>
+
+    <form action="/modify_inventory/<%= @inventory.id %>"  method="post" >
+      <div class="form-group">
+        <label for="wine_id_box">
+          Wine
+        </label>
+
+        <input type="text" id="wine_id_box" name="wine_id_from_query" class="form-control" value="<%= @inventory.wine_id %>">
+      </div>
+
+      <div class="form-group">
+        <label for="owner_id_box">
+          Owner
+        </label>
+
+        <input type="text" id="owner_id_box" name="owner_id_from_query" class="form-control" value="<%= @inventory.owner_id %>">
+      </div>
+
+      <div class="form-group">
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="location_from_query" class="form-control" value="<%= @inventory.location %>">
+      </div>
+
+      <div class="form-group">
+        <label for="price_box">
+          Price
+        </label>
+
+        <input type="text" id="price_box" name="price_from_query" class="form-control" value="<%= @inventory.price %>">
+      </div>
+
+      <div class="form-group">
+        <label for="end_date_box">
+          End date
+        </label>
+
+        <input type="date" id="end_date_box" name="end_date_from_query" class="form-control" value="<%= @inventory.end_date %>">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update inventory
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -14,7 +14,7 @@ class UserRatingsController < ApplicationController
 
   def create
     @user_rating = UserRating.new
-    @user_rating.user_id = params.fetch("user_id_from_query")
+    @user_rating.user_id = @current_user.id
     @user_rating.wine_id = params.fetch("wine_id_from_query")
     @user_rating.rating = params.fetch("rating_from_query")
 
