@@ -16,115 +16,106 @@
 </div>
 
 <%# Display info %>
-    <div>
-        <div class="row">
-          <div class="col-md-4">
-              <b>Location</b>
-            <br>
-              <%= @inventory.location %>
-          </div>
-          <div class="col-md-4">
-              <b>Price</b>
-            <br>
-              <%= @inventory.price %>
-          </div>
-          <div class="col-md-4">
-              <b>Still in inventory?</b>
-            <br>
-              <% if @alive == true %>
-                <i class="fas fa-check"></i>
-              <% else %>
-                <i class="fas fa-minus-circle"></i>
-              <% end %>
-          </div>
 
-        </div>
-
-        <dt>
-          Average rating
-        </dt>
-        <dd>
-          <% if @avg_rating == 5 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <% elsif @avg_rating >= 4 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-          <% elsif @avg_rating >= 3 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% elsif @avg_rating >= 2 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% elsif @avg_rating >= 1 %>
-          <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% else %>
-          <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% end %>
-          <%= @avg_rating %>
-        </dd>
-
-      <dl>
-        
-
-        <dt>
-          Tags
-        </dt>
-        <dd>
-          <% if @tags_count != 0 %>
-          <%= @tags.to_sentence %>
-          <% else %>
-          No tags yet
-          <% end %>
-        </dd>
-
-        <% if @inventory.end_date != nil %>
-        <dt>
-          Drank on
-        </dt>
-        <dd>
-          <%= @inventory.end_date %>
-        </dd>
+<div>
+  <%# Inventory info %>
+  <div class="row">
+    <div class="col-md-4">
+        <b>Location</b>
+      <br>
+        <%= @inventory.location %>
+    </div>
+    <div class="col-md-4">
+        <b>Price</b>
+      <br>
+        <%= number_to_currency(@inventory.price) %>
+    </div>
+    <div class="col-md-4">
+        <b>Still in inventory?</b>
+      <br>
+        <% if @alive == true %>
+          <i class="fas fa-check"></i>
         <% else %>
-        <%end%>
+          <i class="fas fa-minus-circle"></i>
+        <% end %>
+    </div>
+  </div>
 
-        <dt>
-          Comments
-        </dt>
-        <dd>
-          <% if @comments.count == 0 %>
+  <br>
+  <br>
+
+  <%# User ratings info %>
+  <div class="row">
+    <div class="col-md-4">
+        <b>Our rating</b>
+      <br>
+        <% if @avg_rating == 5 %>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <% elsif @avg_rating >= 4 %>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+        <% elsif @avg_rating >= 3 %>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+        <% elsif @avg_rating >= 2 %>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+        <% elsif @avg_rating >= 1 %>
+          <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+        <% else %>
+          <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+        <% end %>
+        <%= @avg_rating %>
+    </div>
+    <div class="col-md-4">
+        <b>Tags</b>
+      <br>
+        <% if @tags_count != 0 %>
+          <%= @tags.to_sentence %>
+        <% else %>
+          No tags yet
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <b>Comments</b>
+      <br>
+        <% if @comments.count == 0 %>
           No comments yet
-          <% else %>
+        <% else %>
           <table class="table">
-          <tr>
-            <th>
-              User
-            </th>
-
-            <th>
-              Comment
-            </th>
-          </tr>
-          
-          <% @comments.each do |comment| %>
-          <tr>
-            <td>
-              <%= comment.commenter_name %>
-            </td>
-            <td>
-              <%= comment.comment %>
-            </td>
+            <% @comments.each do |comment| %>
+              <tr>
+                <td>
+                  <%= comment.comment %>
+                </td>
+                <td>
+                  <%= comment.commenter_name %>
+                </td>
+              </tr>
             <% end %>
-          </tr>
           </table>
-          <% end %>
-        </dd>
-        
-        
+        <% end %>
+    </div>
+  </div>
 
-      </dl>
+  <br>
+  <hr>
+
+  <%# Expert info %>
+  <div class="row">
+    <div class="col-md-4">
+        <b>Rating</b>
+      <br>
+        <%= @wine.expert_rating %>
+    </div>
+    <div class="col-md-4">
+        <b>Notes</b>
+      <br>
+        <%= @wine.expert_notes %>
     </div>
   </div>
 </div>
 
-<hr>
 
+<hr>
+<%# USER ACTIONS %>
 <%# Allow remove from inventory %>
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
