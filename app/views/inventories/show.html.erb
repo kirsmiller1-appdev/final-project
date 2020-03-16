@@ -180,15 +180,52 @@
       </div>
 
       <div class="form-group">
-        <label for="rating_box">
+        <label>
           Rating
         </label>
+        
 
-        <input type="text" id="rating_box" name="rating_from_query" class="form-control">
+        <div class="row">
+          <%# 1 star %>
+          <div class="col-md-2">
+            <input type="radio" id="1_stars" value="1" name="rating_from_query">
+              <label for="1_stars">
+                <i class="fas fa-star"></i>
+              </label>
+          </div>
+          <%# 2 star %>
+          <div class="col-md-2">
+            <input type="radio" id="2_stars" value="2" name="rating_from_query">
+              <label for="2_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </div>
+          <%# 3 star %>
+          <div class="col-md-2">
+            <input type="radio" id="3_stars" value="3" name="rating_from_query">
+              <label for="3_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </div>
+          <%# 4 star %>
+          <div class="col-md-2">
+            <input type="radio" id="4_stars" value="4" name="rating_from_query">
+              <label for="4_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </div>
+          <%# 5 star %>
+          <div class="col-md-3">
+            <input type="radio" id="5_stars" value="5" name="rating_from_query">
+              <label for="5_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </div>
+        </div>
       </div>
 
       <button class="btn btn-block btn-outline-secondary">
-        Create user rating
+        Submit rating
       </button>
     </form>
   </div>
