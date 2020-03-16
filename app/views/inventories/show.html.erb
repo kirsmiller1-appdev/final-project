@@ -1,11 +1,7 @@
-<div class="row mb-3">
-    <a href="/inventories" class="btn btn-block btn-outline-secondary">
-      Go back
-    </a>
-    <a href="/delete_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
-      Delete inventory
-    </a>
-</div>
+<a href="/inventories">
+  Go back
+</a>
+
 
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
@@ -228,5 +224,9 @@
   </div>
 
 </div>
+
+<a href="/delete_inventory/<%= @inventory.id %>">
+  Delete inventory
+</a>
 
 
