@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  blend         :string
 #  expert_notes  :text
-#  expert_rating :integer
+#  expert_rating :float
 #  external_url  :string
 #  photo_url     :string
 #  vineyard      :string

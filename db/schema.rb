@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_220746) do
+ActiveRecord::Schema.define(version: 2020_03_16_212232) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_220746) do
     t.integer "vintage"
     t.string "vineyard"
     t.string "blend"
-    t.integer "expert_rating"
+    t.float "expert_rating"
     t.text "expert_notes"
     t.string "photo_url"
     t.string "external_url"

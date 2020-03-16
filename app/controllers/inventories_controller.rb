@@ -20,10 +20,19 @@ class InventoriesController < ApplicationController
   def show
     the_id = params.fetch("id_from_path")
     @inventory = Inventory.where({:id => the_id }).at(0)
+    
     wine_id = @inventory.fetch(:wine_id)
     @wine = Wine.where({:id => wine_id}).at(0)
+    
     owner_id = @inventory.fetch(:owner_id)
     @owner = User.where({ :id => owner_id }).at(0)
+
+    drank_date = @inventory.end_date
+    if drank_date == nil
+      then @alive = true
+    else @alive = false
+    end
+    
     tags = Tag.where({ :wine_id => wine_id })
     @tags_count = tags.count
     if @tags_count != 0
@@ -36,6 +45,7 @@ class InventoriesController < ApplicationController
     else
       @avg_rating = ratings.reduce(:+) / ratings.size.to_f
     end
+
     @comments = UserComment.where({ :wine_id => wine_id })
     @comments_count = @comments.count
 
