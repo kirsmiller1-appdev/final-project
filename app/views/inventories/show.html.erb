@@ -1,15 +1,10 @@
 <div class="row mb-3">
-  <div class="col">
     <a href="/inventories" class="btn btn-block btn-outline-secondary">
       Go back
     </a>
-  </div>
-
-  <div class="col">
     <a href="/delete_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
       Delete inventory
     </a>
-  </div>
 </div>
 
 <div class="row mb-3">
@@ -24,11 +19,6 @@
     <div>
         <div class="row">
           <div class="col-md-4">
-              <b>Owner</b>
-            <br>
-              <%= @owner.first_name %>
-          </div>
-          <div class="col-md-4">
               <b>Location</b>
             <br>
               <%= @inventory.location %>
@@ -38,29 +28,17 @@
             <br>
               <%= @inventory.price %>
           </div>
+          <div class="col-md-4">
+              <b>Still in inventory?</b>
+            <br>
+              <% if @alive == true %>
+                <i class="fas fa-check"></i>
+              <% else %>
+                <i class="fas fa-minus-circle"></i>
+              <% end %>
+          </div>
+
         </div>
-
-      <dl>
-        <% if @inventory.end_date != nil %>
-        <dt>
-          Drank on
-        </dt>
-        <dd>
-          <%= @inventory.end_date %>
-        </dd>
-        <% else %>
-        <%end%>
-
-        <dt>
-          Tags
-        </dt>
-        <dd>
-          <% if @tag_count == 0 %>
-          No tags yet
-          <% else %>
-          <%= @tags.to_sentence %>
-          <% end %>
-        </dd>
 
         <dt>
           Average rating
@@ -81,6 +59,30 @@
           <% end %>
           <%= @avg_rating %>
         </dd>
+
+      <dl>
+        
+
+        <dt>
+          Tags
+        </dt>
+        <dd>
+          <% if @tags_count != 0 %>
+          <%= @tags.to_sentence %>
+          <% else %>
+          No tags yet
+          <% end %>
+        </dd>
+
+        <% if @inventory.end_date != nil %>
+        <dt>
+          Drank on
+        </dt>
+        <dd>
+          <%= @inventory.end_date %>
+        </dd>
+        <% else %>
+        <%end%>
 
         <dt>
           Comments
@@ -143,7 +145,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h2>
-      Add a new tag
+      Add a tag
     </h2>
 
     <form action="/insert_tag" method="post">
@@ -170,7 +172,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h2>
-      Add a new user rating
+      Rate
     </h2>
 
     <form action="/insert_user_rating" method="post">
@@ -180,10 +182,6 @@
       </div>
 
       <div class="form-group">
-        <label>
-          Rating
-        </label>
-        
 
         <div class="row">
           <%# 1 star %>
@@ -235,7 +233,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h2>
-      Add a new user comment
+      Add a comment
     </h2>
 
     <form action="/insert_user_comment" method="post">
