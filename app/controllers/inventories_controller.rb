@@ -24,7 +24,9 @@ class InventoriesController < ApplicationController
     @wine = Wine.where({:id => wine_id}).at(0)
     owner_id = @inventory.fetch(:owner_id)
     @owner = User.where({ :id => owner_id }).at(0)
+
     @tags = Tag.where({ :wine_id => wine_id }).pluck(:tag)
+    @tags_count = @tags.size.to_f
     
     ratings = UserRating.where({ :wine_id => wine_id }).pluck(:rating)
     if ratings.size.to_f == 0
@@ -32,7 +34,9 @@ class InventoriesController < ApplicationController
     else
       @avg_rating = ratings.reduce(:+) / ratings.size.to_f
     end
+
     @comments = UserComment.where({ :wine_id => wine_id })
+    @comments_count = @comments.count
 
     render({ :template => "inventories/show.html.erb" })
   end

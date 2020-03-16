@@ -1,54 +1,46 @@
 <div class="row mb-3">
+  <div class="col">
+    <a href="/inventories" class="btn btn-block btn-outline-secondary">
+      Go back
+    </a>
+  </div>
+
+  <div class="col">
+    <a href="/delete_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
+      Delete inventory
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Inventory #<%= @inventory.id %> details
+      <%= @wine.vintage %> <%= @wine.vineyard %> <%= @wine.blend %>
     </h1>
-
-    <div class="row mb-3">
-      <div class="col">
-        <a href="/inventories" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-      </div>
-
-      <div class="col">
-        <a href="/delete_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
-          Delete inventory
-        </a>
-      </div>
-    </div>
+  </div>
+</div>
 
 <%# Display info %>
     <div>
+        <div class="row">
+          <div class="col-md-4">
+              <b>Owner</b>
+            <br>
+              <%= @owner.first_name %>
+          </div>
+          <div class="col-md-4">
+              <b>Location</b>
+            <br>
+              <%= @inventory.location %>
+          </div>
+          <div class="col-md-4">
+              <b>Price</b>
+            <br>
+              <%= @inventory.price %>
+          </div>
+        </div>
+
       <dl>
-        <dt>
-          Wine
-        </dt>
-        <dd>
-          <%= @wine.vintage %> <%= @wine.vineyard %> <%= @wine.blend %>
-        </dd>
-
-        <dt>
-          Owner
-        </dt>
-        <dd>
-          <%= @owner.first_name %>
-        </dd>
-
-        <dt>
-          Location
-        </dt>
-        <dd>
-          <%= @inventory.location %>
-        </dd>
-
-        <dt>
-          Price
-        </dt>
-        <dd>
-          <%= @inventory.price %>
-        </dd>
-
         <% if @inventory.end_date != nil %>
         <dt>
           Drank on
@@ -63,7 +55,11 @@
           Tags
         </dt>
         <dd>
+          <% if @tag_count == 0 %>
+          No tags yet
+          <% else %>
           <%= @tags.to_sentence %>
+          <% end %>
         </dd>
 
         <dt>
@@ -90,6 +86,9 @@
           Comments
         </dt>
         <dd>
+          <% if @comments.count == 0 %>
+          No comments yet
+          <% else %>
           <table class="table">
           <tr>
             <th>
@@ -112,6 +111,7 @@
             <% end %>
           </tr>
           </table>
+          <% end %>
         </dd>
         
         
@@ -215,7 +215,7 @@
               </label>
           </div>
           <%# 5 star %>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <input type="radio" id="5_stars" value="5" name="rating_from_query">
               <label for="5_stars">
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
