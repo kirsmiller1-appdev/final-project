@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      List of all <%= @rating_min %> wines
+      List of all <%= @min_rating.round(0).to_s %>+ star wines
     </h1>
   </div>
 </div>
@@ -18,15 +18,15 @@
         </th>
 
         <th>
+          Our rating
+        </th>
+
+        <th>
           Expert rating
         </th>
 
         <th>
           Expert notes
-        </th>
-
-        <th>
-          User rating
         </th>
 
         <th>
@@ -47,15 +47,15 @@
           </td>
 
           <td>
+            <%= wine.avg_rating %>
+          </td>
+
+          <td>
             <%= wine.expert_rating %>
           </td>
 
           <td>
             <%= wine.expert_notes %>
-          </td>
-
-          <td>
-            <%= wine.avg_rating %>
           </td>
 
           <td>
