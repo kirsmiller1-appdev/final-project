@@ -85,6 +85,7 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
           
   # READ
   match("/inventories", { :controller => "inventories", :action => "index", :via => "get"})
+  match("/inventories/new", { :controller => "inventories", :action => "new", :via => "get"})
   
   match("/inventories/:id_from_path", { :controller => "inventories", :action => "show", :via => "get"})
   

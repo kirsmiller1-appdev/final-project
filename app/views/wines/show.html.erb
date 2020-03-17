@@ -1,50 +1,25 @@
+<a href="/wines">
+  Go back
+</a>
+
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Wine #<%= @wine.id %> details
+      <%= @wine.vintage %> <%= @wine.vineyard %> <%= @wine.blend %>
     </h1>
 
     <div class="row mb-3">
-      <div class="col">
-        <a href="/wines" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-      </div>
-
-      <div class="col">
-        <a href="/delete_wine/<%= @wine.id %>" class="btn btn-block btn-outline-secondary">
-          Delete wine
-        </a>
+      <div class="col-md-8 offset-md-2">
+        <img src="<%= @wine.photo_url %>" height="250">
       </div>
     </div>
 
     <dl>
       <dt>
-        Vintage
-      </dt>
-      <dd>
-        <%= @wine.vintage %>
-      </dd>
-
-      <dt>
-        Vineyard
-      </dt>
-      <dd>
-        <%= @wine.vineyard %>
-      </dd>
-
-      <dt>
-        Blend
-      </dt>
-      <dd>
-        <%= @wine.blend %>
-      </dd>
-
-      <dt>
         Expert rating
       </dt>
       <dd>
-        <%= @wine.expert_rating %>
+        <% <%= @wine.expert_rating %>
       </dd>
 
       <dt>
@@ -53,34 +28,9 @@
       <dd>
         <%= @wine.expert_notes %>
       </dd>
+      
+      <a href="<%= @wine.external_url %>">More info</a>
 
-      <dt>
-        Photo url
-      </dt>
-      <dd>
-        <%= @wine.photo_url %>
-      </dd>
-
-      <dt>
-        External url
-      </dt>
-      <dd>
-        <%= @wine.external_url %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@wine.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@wine.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
@@ -155,6 +105,10 @@
         Update wine
       </button>
     </form>
+    <br>
+    <a href="/delete_wine/<%= @wine.id %>" class="btn btn-block btn-outline-secondary">
+    Delete wine
+    </a>
   </div>
 </div>
 

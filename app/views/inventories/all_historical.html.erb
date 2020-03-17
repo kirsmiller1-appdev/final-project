@@ -1,1 +1,103 @@
-COPY FROM INDEX WHEN DONE
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All historical inventory
+    </h1>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <a href="/inventories/new">
+      <button class="btn btn-block btn-outline-secondary">
+        Add to cellar
+      </button>
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+        </th>
+
+        <th>
+          Wine
+        </th>
+
+        <th>
+          Location
+        </th>
+
+        <th>
+          Price
+        </th>
+
+        <th>
+          In inventory?
+        </th>
+
+        <th>
+          Tags
+        </th>
+
+        <th>
+          Our rating
+        </th>
+
+      </tr>
+
+      <% @inventories.each do |inventory| %>
+      <tr>
+        <td>
+          <p style="text-align:center;"><img src="<%= inventory.photo_url %>" height="100"></p>
+        </td>
+
+        <td>
+          <a href="/inventories/<%= inventory.id %>">
+            <%= inventory.vintage %> <%= inventory.vineyard %> <%= inventory.blend %>
+          </a>
+        </td>
+
+        <td>
+          <%= inventory.location %>
+        </td>
+
+        <td>
+          <%= number_to_currency(inventory.price) %>
+        </td>
+
+        <td>
+          <% if inventory.alive == true %>
+            <i style="color:green;" class="fas fa-check"></i>
+          <% else %>
+            <i style="color:#ed8780;" class="fas fa-minus-circle"></i>
+          <% end %>
+        </td>
+
+        <td>
+          <% inventory.tags_array.each do |tag| %>
+            <p style="background-color:#5bc0de; display:inline; padding:.2em .6em .3em;font-size:75%;font-weight:700; line-height:1; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:.25em;">
+            <a href="/wines/tag/<%= tag.tag %>" style="color:#fff;">
+              <%= tag.tag %>
+            </a>
+            </p>
+            <br>
+          <% end %>
+        </td>
+
+        <td>
+          <% if inventory.avg_rating == 0 %>
+          <% else %>
+            <%= inventory.avg_rating %>
+          <% end %>
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+

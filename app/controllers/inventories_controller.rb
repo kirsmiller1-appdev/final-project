@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.all.order({ :created_at => :desc })
+    @inventories = Inventory.where({ :end_date => nil }).all.order({ :created_at => :desc })
 
     render({ :template => "inventories/index.html.erb" })
   end
@@ -24,7 +24,7 @@ class InventoriesController < ApplicationController
   end
 
   def index_all
-    @inventories = Inventory.all.order({ :created_at => :desc })
+    @inventories = Inventory.all.order({ :end_date => :asc })
 
     render({ :template => "inventories/all_historical.html.erb" })
   end
@@ -52,6 +52,10 @@ class InventoriesController < ApplicationController
     render({ :template => "inventories/show.html.erb" })
   end
 
+  def new
+    render({ :template => "inventories/new.html.erb" })
+  end
+
   def create
     ## check whether the wine exists in the wine table
     wine_check_vintage = params.fetch("vintage_from_query")
@@ -72,7 +76,7 @@ class InventoriesController < ApplicationController
       if @wine.valid?
         then @wine.save
       else
-        redirect_to("/inventories", { :notice => "Wine failed to create successfully." })
+        redirect_to("/inventories/new", { :notice => "Wine failed to create successfully." })
       end
     end
 
@@ -84,9 +88,9 @@ class InventoriesController < ApplicationController
 
     if @inventory.valid?
       @inventory.save
-      redirect_to("/inventories", { :notice => "Inventory created successfully." })
+      redirect_to("/wines/"+@wine.id.to_s, { :notice => "Inventory created successfully." })
     else
-      redirect_to("/inventories", { :notice => "Inventory failed to create successfully." })
+      redirect_to("/inventories/new", { :notice => "Inventory failed to create successfully." })
     end
   end
 

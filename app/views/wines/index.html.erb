@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      List of all wines
+      All wines
     </h1>
   </div>
 </div>
@@ -36,7 +36,7 @@
       <% @wines.each do |wine| %>
       <tr>
         <td>
-          <img src="<%= wine.photo_url %>" width="50">
+          <p style="text-align:center;"><img src="<%= wine.photo_url %>" height="100"></p>
         </td>
 
         <td>
@@ -54,7 +54,10 @@
         </td>
 
         <td>
-          <%= wine.avg_rating %>
+          <% if wine.avg_rating == 0 %>
+          <% else %>
+            <%= wine.avg_rating %>
+          <% end %>
         </td>
 
         <td>
