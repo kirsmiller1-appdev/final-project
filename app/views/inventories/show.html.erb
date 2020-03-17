@@ -37,12 +37,12 @@
         <b>Still in inventory?</b>
       <br>
         <% if @alive == true %>
-          <i class="fas fa-check"></i>
+          <i style="color:green;" class="fas fa-check"></i>
           <a href="/remove_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
           Remove inventory
           </a>
         <% else %>
-          <i class="fas fa-minus-circle"></i>
+          <i style="color:#ed8780;" class="fas fa-minus-circle"></i>
         <% end %>
     </div>
   </div>

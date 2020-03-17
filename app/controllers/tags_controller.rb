@@ -18,7 +18,7 @@ class TagsController < ApplicationController
     tag_attempt = params.fetch("tag_from_query").to_s
 
     if tag_attempt.length == 0
-      redirect_to("/inventories/"+@inventory_id, { :notice => "Tag failed to create successfully." })
+      redirect_to("/inventories/"+@inventory_id, { :alert => "Tag failed to create successfully." })
     else 
       @tag = Tag.new
       @tag.wine_id = params.fetch("wine_id_from_query")
@@ -29,7 +29,7 @@ class TagsController < ApplicationController
         @tag.save
         redirect_to("/inventories/"+@inventory_id, { :notice => "Tag created successfully." })
       else
-        redirect_to("/inventories/"+@inventory_id, { :notice => "Tag failed to create successfully." })
+        redirect_to("/inventories/"+@inventory_id, { :alert => "Tag failed to create successfully." })
       end
     end
   end

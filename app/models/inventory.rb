@@ -69,9 +69,14 @@ class Inventory < ApplicationRecord
   end
 
   def tags
-    tags_array = Tag.where({ :wine_id => wine_id })
+    tags_array = Tag.where({ :wine_id => wine_id }).all
     tags = tags_array.pluck(:tag)
     return tags
+  end
+
+  def tags_array
+    tags_array = Tag.where({ :wine_id => wine_id })
+    return tags_array
   end
 
   def alive
