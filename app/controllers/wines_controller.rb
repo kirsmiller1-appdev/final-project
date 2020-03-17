@@ -35,6 +35,13 @@ class WinesController < ApplicationController
     render({ :template => "wines/tag.html.erb" })
   end
 
+  def index_rating
+    @min_rating = params.fetch("rating_from_path").to_f
+    @wines = Wine.all.order({ :created_at => :desc })
+
+    render({ :template => "wines/rating.html.erb" })
+  end
+
   def show
     the_id = params.fetch("id_from_path")
     @wine = Wine.where({:id => the_id }).at(0)

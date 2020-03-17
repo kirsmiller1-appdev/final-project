@@ -30,6 +30,10 @@
           Expert rating
         </th>
 
+        <th>
+          Expert notes
+        </th>
+
 
       </tr>
 
@@ -50,11 +54,22 @@
         </td>
 
         <td>
-          <%= inventory.tags.to_sentence %>
+          <% inventory.tags_array.each do |tag| %>
+            <p style="background-color:#5bc0de; display:inline; padding:.2em .6em .3em;font-size:75%;font-weight:700; line-height:1; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:.25em;">
+            <a href="/wines/tag/<%= tag.tag %>" style="color:#fff;">
+              <%= tag.tag %>
+            </a>
+            </p>
+            &nbsp;
+          <% end %>
         </td>
 
         <td>
           <%= inventory.expert_rating %>
+        </td>
+
+        <td>
+          <%= inventory.expert_notes %>
         </td>
 
       </tr>
