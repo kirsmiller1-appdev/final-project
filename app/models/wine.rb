@@ -36,4 +36,23 @@ class Wine < ApplicationRecord
     end
     return avg_rating.round(1)
   end
+
+    def tags
+    tags_array = Tag.where({ :wine_id => self.id }).all
+    tags = tags_array.pluck(:tag)
+    return tags
+  end
+
+  def tags_array
+    tags_array = Tag.where({ :wine_id => self.id })
+    return tags_array
+  end
+
+  def available
+    inventory_list = Inventory.where({ :wine_id => self.id }).all
+    inventory_end_date = inventory_list.pluck(:end_date)
+    available = inventory_end_date.any?{ |dates| dates.nil? }
+    return available
+  end
+
 end

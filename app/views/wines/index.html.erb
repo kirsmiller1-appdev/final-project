@@ -18,15 +18,23 @@
         </th>
 
         <th>
+          Available?
+        </th>
+
+        <th>
+          Tags
+        </th>
+
+        <th>
+          User rating
+        </th>
+
+        <th>
           Expert rating
         </th>
 
         <th>
           Expert notes
-        </th>
-
-        <th>
-          User rating
         </th>
 
         <th>
@@ -46,11 +54,22 @@
         </td>
 
         <td>
-          <%= wine.expert_rating %>
+          <% if wine.available == true %>
+            <i style="color:green;" class="fas fa-check"></i>
+          <% else %>
+            <i style="color:#ed8780;" class="fas fa-minus-circle"></i>
+          <% end %>
         </td>
-
+        
         <td>
-          <%= wine.expert_notes %>
+          <% wine.tags_array.each do |tag| %>
+            <p style="background-color:#5bc0de; display:inline; padding:.2em .6em .3em;font-size:75%;font-weight:700; line-height:1; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:.25em;">
+            <a href="/wines/tag/<%= tag.tag %>" style="color:#fff;">
+              <%= tag.tag %>
+            </a>
+            </p>
+            <br>
+          <% end %>
         </td>
 
         <td>
@@ -59,6 +78,15 @@
             <%= wine.avg_rating %>
           <% end %>
         </td>
+
+        <td>
+          <%= wine.expert_rating %>
+        </td>
+
+        <td>
+          <%= wine.expert_notes %>
+        </td>
+
 
         <td>
           <a href="<%= wine.external_url %>">More info</a>
