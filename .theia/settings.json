@@ -1,4 +1,4 @@
 {
-  "editor.autoSave": "off",
+  "editor.autoSave": "on",
   "editor.tabSize": 2,
 }

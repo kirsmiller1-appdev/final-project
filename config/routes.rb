@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+match("/", { :controller => "users", :action => "home", :via => "get"})
 
   # Routes for the Follow request resource:
 
