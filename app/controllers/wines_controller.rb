@@ -26,6 +26,15 @@ class WinesController < ApplicationController
     render({ :template => "wines/blend.html.erb" })
   end
 
+  def index_tag
+    @tag = params.fetch("tag_from_path")
+    tag_instances = Tag.where({ :tag => @tag}).all
+    wines_with_tag = tag_instances.pluck(:wine_id)
+    @wines = Wine.where({ :id => wines_with_tag }).all.order({ :created_at => :desc })
+
+    render({ :template => "wines/tag.html.erb" })
+  end
+
   def show
     the_id = params.fetch("id_from_path")
     @wine = Wine.where({:id => the_id }).at(0)

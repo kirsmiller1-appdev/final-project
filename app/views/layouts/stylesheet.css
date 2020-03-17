@@ -1,4 +1,15 @@
-#notice {
+alert {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+#alert {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
