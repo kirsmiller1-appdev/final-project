@@ -12,9 +12,21 @@ class InventoriesController < ApplicationController
   end
 
   def index_sf
-    @inventories = Inventory.where({ :location => "SF" }).where({ :end_date => nil}).all.order({ :created_at => :desc })
+    @inventories = Inventory.where({ :end_date => nil}).all.order({ :created_at => :desc })
 
     render({ :template => "inventories/sf.html.erb" })
+  end
+
+  def index_drank
+    @inventories = Inventory.where.not({ :end_date => nil}).all.order({ :created_at => :desc })
+
+    render({ :template => "inventories/drank.html.erb" })
+  end
+
+  def index_all
+    @inventories = Inventory.all.order({ :created_at => :desc })
+
+    render({ :template => "inventories/all_historical.html.erb" })
   end
 
   def show

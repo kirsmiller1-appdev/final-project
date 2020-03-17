@@ -90,6 +90,8 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   
   match("/chicago", { :controller => "inventories", :action => "index_chicago", :via => "get"})
   match("/sf", { :controller => "inventories", :action => "index_sf", :via => "get"})
+  match("/drank", { :controller => "inventories", :action => "index_drank", :via => "get"})
+  match("/inventories_all", { :controller => "inventories", :action => "index_all", :via => "get"})
 
   # UPDATE
   
