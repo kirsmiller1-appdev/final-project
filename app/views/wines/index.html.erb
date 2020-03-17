@@ -89,7 +89,12 @@
 
 
         <td>
-          <a href="<%= wine.external_url %>">More info</a>
+          <% if wine.external_url.length < 1 %>
+          <% else %>
+            <a href="<%= wine.external_url %>">
+              More info
+            </a>
+          <% end %>
         </td>
       </tr>
       <% end %>
