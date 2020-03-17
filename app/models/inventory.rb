@@ -49,4 +49,12 @@ class Inventory < ApplicationRecord
     tags = tags_array.pluck(:tag)
     return tags
   end
+
+  def alive
+    if end_date == nil
+      return true
+    else 
+      return false
+    end
+  end
 end

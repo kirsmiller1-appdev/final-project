@@ -18,11 +18,13 @@ class UserCommentsController < ApplicationController
     @user_comment.wine_id = params.fetch("wine_id_from_query")
     @user_comment.comment = params.fetch("comment_from_query")
 
+    @inventory_id = params.fetch("inventory_id_from_query")
+
     if @user_comment.valid?
       @user_comment.save
-      redirect_to("/user_comments", { :notice => "User comment created successfully." })
+      redirect_to("/inventories/"+@inventory_id, { :notice => "User comment created successfully." })
     else
-      redirect_to("/user_comments", { :notice => "User comment failed to create successfully." })
+      redirect_to("/inventories/"+@inventory_id, { :notice => "User comment failed to create successfully." })
     end
   end
 

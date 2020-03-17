@@ -27,11 +27,7 @@ class InventoriesController < ApplicationController
     owner_id = @inventory.fetch(:owner_id)
     @owner = User.where({ :id => owner_id }).at(0)
 
-    drank_date = @inventory.end_date
-    if drank_date == nil
-      then @alive = true
-    else @alive = false
-    end
+    @alive = @inventory.alive
     
     tags = Tag.where({ :wine_id => wine_id })
     @tags_count = tags.count

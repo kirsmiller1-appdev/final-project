@@ -13,16 +13,24 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new
-    @tag.wine_id = params.fetch("wine_id_from_query")
-    @tag.user_id = @current_user.id
-    @tag.tag = params.fetch("tag_from_query")
+    @inventory_id = params.fetch("inventory_id_from_query")
 
-    if @tag.valid?
-      @tag.save
-      redirect_to("/tags", { :notice => "Tag created successfully." })
-    else
-      redirect_to("/tags", { :notice => "Tag failed to create successfully." })
+    tag_attempt = params.fetch("tag_from_query").to_s
+
+    if tag_attempt.length == 0
+      redirect_to("/inventories/"+@inventory_id, { :notice => "Tag failed to create successfully." })
+    else 
+      @tag = Tag.new
+      @tag.wine_id = params.fetch("wine_id_from_query")
+      @tag.user_id = @current_user.id
+      @tag.tag = params.fetch("tag_from_query")
+
+      if @tag.valid?
+        @tag.save
+        redirect_to("/inventories/"+@inventory_id, { :notice => "Tag created successfully." })
+      else
+        redirect_to("/inventories/"+@inventory_id, { :notice => "Tag failed to create successfully." })
+      end
     end
   end
 

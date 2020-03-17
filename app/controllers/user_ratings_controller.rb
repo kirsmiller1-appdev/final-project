@@ -17,12 +17,14 @@ class UserRatingsController < ApplicationController
     @user_rating.user_id = @current_user.id
     @user_rating.wine_id = params.fetch("wine_id_from_query")
     @user_rating.rating = params.fetch("rating_from_query")
+    
+    @inventory_id = params.fetch("inventory_id_from_query")
 
     if @user_rating.valid?
       @user_rating.save
-      redirect_to("/user_ratings", { :notice => "User rating created successfully." })
+      redirect_to("/inventories/"+@inventory_id, { :notice => "User rating created successfully." })
     else
-      redirect_to("/user_ratings", { :notice => "User rating failed to create successfully." })
+      redirect_to("/inventories/"+@inventory_id, { :notice => "User rating failed to create successfully." })
     end
   end
 

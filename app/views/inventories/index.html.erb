@@ -16,10 +16,6 @@
         </th>
 
         <th>
-          Owner
-        </th>
-
-        <th>
           Location
         </th>
 
@@ -28,14 +24,11 @@
         </th>
 
         <th>
-          End date
+          In inventory?
         </th>
 
         <th>
           Tags
-        </th>
-
-        <th>
         </th>
       </tr>
 
@@ -43,11 +36,9 @@
       <tr>
 
         <td>
-          <%= inventory.vintage %> <%= inventory.vineyard %> <%= inventory.blend %>
-        </td>
-
-        <td>
-          <%= inventory.owner_name %>
+          <a href="/inventories/<%= inventory.id %>">
+            <%= inventory.vintage %> <%= inventory.vineyard %> <%= inventory.blend %>
+          </a>
         </td>
 
         <td>
@@ -59,17 +50,15 @@
         </td>
 
         <td>
-          <%= inventory.end_date %>
+          <% if inventory.alive == true %>
+            <i class="fas fa-check"></i>
+          <% else %>
+            <i class="fas fa-minus-circle"></i>
+          <% end %>
         </td>
 
         <td>
           <%= inventory.tags.to_sentence %>
-        </td>
-
-        <td>
-          <a href="/inventories/<%= inventory.id %>">
-            Show details
-          </a>
         </td>
       </tr>
       <% end %>
@@ -82,7 +71,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h2>
-      Add a new wine to your collection
+      Add a new wine to collection
     </h2>
 
     <form action="/insert_inventory" method="post">
