@@ -23,9 +23,6 @@ class InventoriesController < ApplicationController
     
     wine_id = @inventory.fetch(:wine_id)
     @wine = Wine.where({:id => wine_id}).at(0)
-    
-    owner_id = @inventory.fetch(:owner_id)
-    @owner = User.where({ :id => owner_id }).at(0)
 
     @alive = @inventory.alive
     
@@ -37,7 +34,7 @@ class InventoriesController < ApplicationController
 
     @avg_rating = @inventory.avg_rating
 
-    @comments = UserComment.where({ :wine_id => wine_id })
+    @comments = @inventory.comments_array
     @comments_count = @comments.count
 
     render({ :template => "inventories/show.html.erb" })

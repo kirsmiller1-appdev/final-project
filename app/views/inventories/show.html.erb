@@ -1,6 +1,7 @@
 <a href="/inventories">
-  Go back
+  Back to all inventory
 </a>
+<br>
 
 
 <div class="row mb-3">
@@ -8,6 +9,12 @@
     <h1>
       <%= @wine.vintage %> <%= @wine.vineyard %> <%= @wine.blend %>
     </h1>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <img src="<%= @wine.photo_url %>" height="250">
   </div>
 </div>
 
@@ -44,7 +51,7 @@
   <br>
 
   <%# Expert info %>
-  Expert information
+  <h2>Expert information</h2>
   <div class="row">
     <div class="col-md-4">
         <b>Rating</b>
@@ -82,7 +89,7 @@
 <hr>
 
   <%# User ratings info %>
-  Our information
+  <h2>Our information</h2>
   <div class="row">
     <div class="col-md-4">
         <b>Our rating</b>
