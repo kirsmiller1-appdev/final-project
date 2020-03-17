@@ -30,6 +30,11 @@
         <th>
           Tags
         </th>
+
+        <th>
+          Rating
+        </th>
+
       </tr>
 
       <% @inventories.each do |inventory| %>
@@ -46,7 +51,7 @@
         </td>
 
         <td>
-          <%= inventory.price %>
+          <%= number_to_currency(inventory.price) %>
         </td>
 
         <td>
@@ -60,6 +65,11 @@
         <td>
           <%= inventory.tags.to_sentence %>
         </td>
+
+        <td>
+          <%= inventory.avg_rating %>
+        </td>
+
       </tr>
       <% end %>
     </table>

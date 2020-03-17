@@ -57,4 +57,14 @@ class Inventory < ApplicationRecord
       return false
     end
   end
+
+  def avg_rating
+    ratings = UserRating.where({ :wine_id => self.wine_id }).pluck(:rating)
+    if ratings.size.to_f == 0
+      avg_rating = 0
+    else
+      avg_rating = ratings.reduce(:+) / ratings.size.to_f
+    end
+    return avg_rating.round(1)
+  end
 end

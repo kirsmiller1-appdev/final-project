@@ -16,19 +16,7 @@
         </th>
 
         <th>
-          Owner
-        </th>
-
-        <th>
-          Location
-        </th>
-
-        <th>
           Price
-        </th>
-
-        <th>
-          End date
         </th>
 
         <th>
@@ -36,30 +24,22 @@
         </th>
 
         <th>
+          Rating
         </th>
+
       </tr>
 
       <% @inventories.each do |inventory| %>
       <tr>
 
         <td>
-          <%= inventory.vintage %> <%= inventory.vineyard %> <%= inventory.blend %>
+          <a href="/inventories/<%= inventory.id %>">
+            <%= inventory.vintage %> <%= inventory.vineyard %> <%= inventory.blend %>
+          </a>
         </td>
 
         <td>
-          <%= inventory.owner_name %>
-        </td>
-
-        <td>
-          <%= inventory.location %>
-        </td>
-
-        <td>
-          <%= inventory.price %>
-        </td>
-
-        <td>
-          <%= inventory.end_date %>
+          <%= number_to_currency(inventory.price) %>
         </td>
 
         <td>
@@ -67,10 +47,9 @@
         </td>
 
         <td>
-          <a href="/inventories/<%= inventory.id %>">
-            Show details
-          </a>
+          <%= inventory.avg_rating %>
         </td>
+
       </tr>
       <% end %>
     </table>

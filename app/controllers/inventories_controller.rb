@@ -6,13 +6,13 @@ class InventoriesController < ApplicationController
   end
 
   def index_chicago
-    @inventories = Inventory.where({ :location => "Chicago" }).all.order({ :created_at => :desc })
+    @inventories = Inventory.where({ :location => "Chicago" }).where({ :end_date => nil}).all.order({ :created_at => :desc })
 
     render({ :template => "inventories/chicago.html.erb" })
   end
 
   def index_sf
-    @inventories = Inventory.where({ :location => "SF" }).all.order({ :created_at => :desc })
+    @inventories = Inventory.where({ :location => "SF" }).where({ :end_date => nil}).all.order({ :created_at => :desc })
 
     render({ :template => "inventories/sf.html.erb" })
   end
@@ -35,12 +35,7 @@ class InventoriesController < ApplicationController
       @tags = tags.pluck(:tag)
     end
 
-    ratings = UserRating.where({ :wine_id => wine_id }).pluck(:rating)
-    if ratings.size.to_f == 0
-      @avg_rating = 0
-    else
-      @avg_rating = ratings.reduce(:+) / ratings.size.to_f
-    end
+    @avg_rating = @inventory.avg_rating
 
     @comments = UserComment.where({ :wine_id => wine_id })
     @comments_count = @comments.count
