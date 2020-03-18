@@ -2,19 +2,25 @@ class InventoriesController < ApplicationController
   def index
     @inventories = Inventory.where({ :end_date => nil }).all.order({ :created_at => :desc })
 
+    @location_info = "your cellar"
+
     render({ :template => "inventories/index.html.erb" })
   end
 
   def index_chicago
     @inventories = Inventory.where({ :location => "Chicago" }).where({ :end_date => nil}).all.order({ :created_at => :desc })
 
-    render({ :template => "inventories/chicago.html.erb" })
+    @location_info = "Chicago"
+
+    render({ :template => "inventories/index.html.erb" })
   end
 
   def index_sf
-    @inventories = Inventory.where({ :end_date => nil}).all.order({ :created_at => :desc })
+    @inventories = Inventory.where({ :location => "SF" }).where({ :end_date => nil}).all.order({ :created_at => :desc })
 
-    render({ :template => "inventories/sf.html.erb" })
+    @location_info = "SF"
+    
+    render({ :template => "inventories/index.html.erb" })
   end
 
   def index_drank

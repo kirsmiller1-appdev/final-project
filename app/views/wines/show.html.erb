@@ -32,19 +32,25 @@
         Expert notes
       </dt>
       <dd>
-        <% if @wine.expert_notes.length < 1 %>
+        <% if @wine.expert_notes == nil %>
           <i>No tasting notes</i>
         <% else %>
-          <%= @wine.expert_notes %>
+          <% if @wine.expert_notes.length < 1 %>
+            <i>No tasting notes</i>
+          <% else %>
+            <%= @wine.expert_notes %>
+          <% end %>
         <% end %>
       </dd>
       
-      
-      <% if @wine.external_url.length < 1 %>
+      <% if @wine.external_url == nil %>
       <% else %>
-        <a href="<%= @wine.external_url %>">
-          More info
-        </a>
+        <% if @wine.external_url.length < 1 %>
+        <% else %>
+          <a href="<%= @wine.external_url %>">
+            More info
+          </a>
+        <% end %>
       <% end %>
 
     </dl>
