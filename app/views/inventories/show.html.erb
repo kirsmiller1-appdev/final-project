@@ -94,20 +94,24 @@
     <div class="col-md-4">
         <b>Our rating</b>
       <br>
-        <% if @avg_rating == 5 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <% elsif @avg_rating >= 4 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-        <% elsif @avg_rating >= 3 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-        <% elsif @avg_rating >= 2 %>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-        <% elsif @avg_rating >= 1 %>
-          <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+      <% if @avg_rating == 0 %>
+        No rating
         <% else %>
-          <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% if @avg_rating == 5 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <% elsif @avg_rating >= 4 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 3 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 2 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 1 %>
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% else %>
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% end %>
+          <%= @avg_rating %>
         <% end %>
-        <%= @avg_rating %>
     </div>
     <div class="col-md-4">
         <b>Tags</b>
@@ -164,30 +168,44 @@
       <div class="form-group">
           <div class="row">
             <%# 1 star %>
+            <span style="font-size: 0.75em;">
               <input type="radio" id="1_stars" value="1" name="rating_from_query">
                 <label for="1_stars">
                   <i class="fas fa-star"></i>
                 </label>
+            </span>
+            &nbsp;&nbsp;
             <%# 2 star %>
+            <span style="font-size: 0.75em;">
               <input type="radio" id="2_stars" value="2" name="rating_from_query">
                 <label for="2_stars">
                   <i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </label>
+              </span>
+              &nbsp;&nbsp;
             <%# 3 star %>
+            <span style="font-size: 0.75em;">
               <input type="radio" id="3_stars" value="3" name="rating_from_query">
                 <label for="3_stars">
                   <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </label>
+            </span>
+            &nbsp;&nbsp;
             <%# 4 star %>
+            <span style="font-size: 0.75em;">
               <input type="radio" id="4_stars" value="4" name="rating_from_query">
                 <label for="4_stars">
                   <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </label>
+            </span>
+            &nbsp;&nbsp;
             <%# 5 star %>
+            <span style="font-size: 0.75em;">
               <input type="radio" id="5_stars" value="5" name="rating_from_query">
                 <label for="5_stars">
                   <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </label>
+            </span>
           </div>
         </div>
 
