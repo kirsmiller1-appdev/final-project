@@ -98,7 +98,14 @@ class Inventory < ApplicationRecord
   end
 
   def comments_array
-    comments = UserComment.where({ :wine_id => self.wine_id }).all
+    comments_array = UserComment.where({ :wine_id => self.wine_id }).all
+    return comments_array
+  end
+
+  def comments
+    comments_array = UserComment.where({ :wine_id => self.wine_id }).all
+    comments = comments_array.pluck(:comment)
     return comments
   end
+
 end

@@ -114,8 +114,8 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   # READ
   match("/wines", { :controller => "wines", :action => "index", :via => "get"})
   match("/wines/vintage/:vintage_from_path", { :controller => "wines", :action => "index_vintage", :via => "get"})
-  match("/wines/vineyard/:vineyard_from_path", { :controller => "wines", :action => "index_vineyard", :via => "get"})
-  match("/wines/blend/:blend_from_path", { :controller => "wines", :action => "index_blend", :via => "get"})
+  # match("/wines/vineyard/:vineyard_from_path", { :controller => "wines", :action => "index_vineyard", :via => "get"})
+  # match("/wines/blend/:blend_from_path", { :controller => "wines", :action => "index_blend", :via => "get"})
   match("/wines/tag/:tag_from_path", { :controller => "wines", :action => "index_tag", :via => "get"})
   match("/wines/rating/:rating_from_path", { :controller => "wines", :action => "index_rating", :via => "get"})
   

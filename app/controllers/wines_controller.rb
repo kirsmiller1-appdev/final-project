@@ -2,6 +2,8 @@ class WinesController < ApplicationController
   def index
     @wines = Wine.all.order({ :created_at => :desc })
 
+    @page_info = ""
+
     render({ :template => "wines/index.html.erb" })
   end
 
@@ -9,37 +11,48 @@ class WinesController < ApplicationController
     vintage_search = params.fetch("vintage_from_path")
     @wines = Wine.where({ :vintage => vintage_search }).all.order({ :created_at => :desc })
 
-    render({ :template => "wines/vintage.html.erb" })
+    @page_info = @wines.at(0).vintage.to_s + " "
+
+    render({ :template => "wines/index.html.erb" })
   end
 
-  def index_vineyard
-    vineyard_search = params.fetch("vineyard_from_path")
-    @wines = Wine.where({ :vineyard => vineyard_search }).all.order({ :created_at => :desc })
+  # def index_vineyard
+  #   vineyard_search = params.fetch("vineyard_from_path")
+  #   @wines = Wine.where({ :vineyard => vineyard_search }).all.order({ :created_at => :desc })
 
-    render({ :template => "wines/vineyard.html.erb" })
-  end
+  #   @page_info = @wines.at(0).vineyard + " "
 
-  def index_blend
-    blend_search = params.fetch("blend_from_path")
-    @wines = Wine.where({ :blend => blend_search }).all.order({ :created_at => :desc })
+  #   render({ :template => "wines/index.html.erb" })
+  # end
 
-    render({ :template => "wines/blend.html.erb" })
-  end
+  # def index_blend
+  #   blend_search = params.fetch("blend_from_path")
+  #   @wines = Wine.where({ :blend => blend_search }).all.order({ :created_at => :desc })
+
+  #   @page_info = @wines.at(0).blend + " "
+
+  #   render({ :template => "wines/index.html.erb" })
+  # end
 
   def index_tag
     @tag = params.fetch("tag_from_path")
     tag_instances = Tag.where({ :tag => @tag}).all
     wines_with_tag = tag_instances.pluck(:wine_id)
+
     @wines = Wine.where({ :id => wines_with_tag }).all.order({ :created_at => :desc })
 
-    render({ :template => "wines/tag.html.erb" })
+    @page_info = @tag + " "
+
+    render({ :template => "wines/index.html.erb" })
   end
 
   def index_rating
     @min_rating = params.fetch("rating_from_path").to_f
     @wines = Wine.all.order({ :created_at => :desc })
 
-    render({ :template => "wines/rating.html.erb" })
+    @page_info = @min_rating.round(0).to_s + "+ star "
+
+    render({ :template => "wines/index.html.erb" })
   end
 
   def show
