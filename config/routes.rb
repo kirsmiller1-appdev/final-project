@@ -97,6 +97,8 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   # UPDATE
   
   match("/modify_inventory/:id_from_path", { :controller => "inventories", :action => "update", :via => "post"})
+  match("/change_inventory/:id_from_path", { :controller => "inventories", :action => "change", :via => "get"})
+
 
   # REMOVE FROM INVENTORY 
   match("/remove_inventory/:id_from_path", { :controller => "inventories", :action => "remove", :via => "get"})

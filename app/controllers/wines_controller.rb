@@ -74,6 +74,7 @@ class WinesController < ApplicationController
 
     if @wine.valid?
       @wine.save
+
       redirect_to("/wines", { :notice => "Wine created successfully." })
     else
       redirect_to("/wines", { :notice => "Wine failed to create successfully." })

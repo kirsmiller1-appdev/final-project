@@ -7,6 +7,7 @@ class InventoriesController < ApplicationController
     render({ :template => "inventories/index.html.erb" })
   end
 
+
   def index_chicago
     @inventories = Inventory.where({ :location => "Chicago" }).where({ :end_date => nil}).all.order({ :created_at => :desc })
 
@@ -100,15 +101,19 @@ class InventoriesController < ApplicationController
     end
   end
 
+  def change 
+    the_id = params.fetch("id_from_path")
+    @inventory = Inventory.where({:id => the_id }).at(0)
+
+    render({ :template => "inventories/edit.html.erb" })
+  end
+
   def update
     the_id = params.fetch("id_from_path")
     @inventory = Inventory.where({ :id => the_id }).at(0)
 
-    @inventory.wine_id = params.fetch("wine_id_from_query")
-    @inventory.owner_id = params.fetch("owner_id_from_query")
     @inventory.location = params.fetch("location_from_query")
     @inventory.price = params.fetch("price_from_query")
-    @inventory.end_date = params.fetch("end_date_from_query")
 
     if @inventory.valid?
       @inventory.save
