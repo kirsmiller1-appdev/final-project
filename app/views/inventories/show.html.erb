@@ -13,52 +13,88 @@
 </div>
 
 <div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
+  <div class="col-md-4 offset-md-2">
     <img src="<%= @wine.photo_url %>" height="250">
+  </div>
+  <div class="col-md-4">
+    <b>Location</b>: <%= @inventory.location %>
+    <br>
+    <b>Price</b>:<%= number_to_currency(@inventory.price) %>
+    <br>
+    <b>Still in inventory?</b>
+    <br>
+    <% if @alive == true %>
+      <i style="font-size: 1.5em; color:green;" class="fas fa-check"></i>
+      <br><br>
+      <a href="/remove_inventory/<%= @inventory.id %>" class="btn btn-block btn-danger">
+      Remove from inventory
+      </a>
+      <a href="/change_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
+      Change location
+      </a>
+    <% else %>
+      <i style="font-size: 1.5em; color:#ed8780;" class="fas fa-minus-circle"></i>
+    <% end %>
   </div>
 </div>
 
 <%# Display info %>
-
+<br><br>
 <div>
-  <%# Inventory info %>
+<%# User ratings info %>
   <div class="row">
-    <div class="col-md-4">
-        <b>Location</b>
-      <br>
-        <%= @inventory.location %>
-    </div>
-    <div class="col-md-4">
-        <b>Price</b>
-      <br>
-        <%= number_to_currency(@inventory.price) %>
-    </div>
-    <div class="col-md-4">
-        <b>Still in inventory?</b>
-      <br>
-        <% if @alive == true %>
-          <i style="font-size: 1.5em; color:green;" class="fas fa-check"></i>
-          <br><br>
-          <a href="/remove_inventory/<%= @inventory.id %>" class="btn btn-block btn-danger">
-          Remove from inventory
-          </a>
-          <a href="/change_inventory/<%= @inventory.id %>" class="btn btn-block btn-outline-secondary">
-          Change location
-          </a>
+    <div class="col-md-4 offset-md-2">
+      <% if @avg_rating == 0 %>
+        No rating
         <% else %>
-          <i style="font-size: 1.5em; color:#ed8780;" class="fas fa-minus-circle"></i>
+          <% if @avg_rating == 5 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <% elsif @avg_rating >= 4 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 3 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 2 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 1 %>
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% else %>
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% end %>
+          <%= @avg_rating %>
+        <% end %>
+        <br>
+        <% if @tags_count != 0 %>
+          <% @inventory.tags_array.each do |tag| %>
+            <p style="background-color:#5bc0de; display:inline; padding:.2em .6em .3em;font-size:75%;font-weight:700; line-height:1; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:.25em;">
+            <a href="/wines/tag/<%= tag.tag %>" style="color:#fff;">
+              <%= tag.tag %>
+            </a>
+            </p>
+            &nbsp;
+          <% end %>
+        <% else %>
+          No tags yet
+        <% end %>
+    </div>
+    <div class="col-md-6">
+        <b>Comments</b>
+      <br>
+        <% if @comments.count == 0 %>
+          No comments yet
+        <% else %>
+            <% @comments.each do |comment| %>
+              <%= comment.comment %> - <i><%= comment.commenter_name %></i>
+              <br>
+            <% end %>
         <% end %>
     </div>
   </div>
-
-  <br>
   <br>
 
   <%# Expert info %>
-  <h2>Expert information</h2>
   <div class="row">
-    <div class="col-md-4">
-        <b>Rating</b>
+    <div class="col-md-4 offset-md-2">
+        <b>Expert rating</b>
       <br>
         <% if @wine.expert_rating == nil %>
           No expert rating
@@ -78,87 +114,20 @@
           <% end %>
           <%= @wine.expert_rating.to_f %>
         <% end %>
-    </div>
-    <div class="col-md-4">
-        <b>Notes</b>
-      <br>
-        <%= @wine.expert_notes %>
-    </div>
-    <div class="col-md-4">
+        <br>
         <a href="<%= @wine.external_url %>">More info</a> <i class="fas fa-external-link-alt"></i>
     </div>
-  </div>
-
-<br>
-<hr>
-
-  <%# User ratings info %>
-  <h2>Our information</h2>
-  <div class="row">
-    <div class="col-md-4">
-        <b>Our rating</b>
+    <div class="col-md-6">
+        <b>Expert notes</b>
       <br>
-      <% if @avg_rating == 0 %>
-        No rating
-        <% else %>
-          <% if @avg_rating == 5 %>
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <% elsif @avg_rating >= 4 %>
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-          <% elsif @avg_rating >= 3 %>
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% elsif @avg_rating >= 2 %>
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% elsif @avg_rating >= 1 %>
-            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% else %>
-            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          <% end %>
-          <%= @avg_rating %>
-        <% end %>
-    </div>
-    <div class="col-md-4">
-        <b>Tags</b>
-      <br>
-        <% if @tags_count != 0 %>
-          <% @inventory.tags_array.each do |tag| %>
-            <p style="background-color:#5bc0de; display:inline; padding:.2em .6em .3em;font-size:75%;font-weight:700; line-height:1; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:.25em;">
-            <a href="/wines/tag/<%= tag.tag %>" style="color:#fff;">
-              <%= tag.tag %>
-            </a>
-            </p>
-            &nbsp;
-          <% end %>
-        <% else %>
-          No tags yet
-        <% end %>
-    </div>
-    <div class="col-md-4">
-        <b>Comments</b>
-      <br>
-        <% if @comments.count == 0 %>
-          No comments yet
-        <% else %>
-          <table class="table">
-            <% @comments.each do |comment| %>
-              <tr>
-                <td>
-                  <%= comment.comment %>
-                </td>
-                <td>
-                  <%= comment.commenter_name %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
-        <% end %>
+        <%= @wine.expert_notes %>
     </div>
   </div>
 
 </div>
 
+<div class="col-md-8 offset-md-2">
 <hr>
-
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
