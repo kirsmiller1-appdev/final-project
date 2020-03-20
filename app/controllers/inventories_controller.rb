@@ -79,6 +79,10 @@ class InventoriesController < ApplicationController
       @wine.vintage = params.fetch("vintage_from_query")
       @wine.vineyard = params.fetch("vineyard_from_query")
       @wine.blend = params.fetch("blend_from_query")
+      @wine.external_url = params.fetch("external_url_from_query")
+      @wine.photo_url = params.fetch("photo_url_from_query")
+      @wine.expert_rating = params.fetch("expert_rating_from_query")
+      @wine.expert_notes = params.fetch("expert_notes_from_query")
       
       if @wine.valid?
         then @wine.save
@@ -95,7 +99,7 @@ class InventoriesController < ApplicationController
 
     if @inventory.valid?
       @inventory.save
-      redirect_to("/wines/"+@wine.id.to_s, { :notice => "Inventory created successfully." })
+      redirect_to("/inventories", { :notice => "Inventory created successfully." })
     else
       redirect_to("/inventories/new", { :notice => "Inventory failed to create successfully." })
     end
