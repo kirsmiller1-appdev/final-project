@@ -1,22 +1,11 @@
+<a href="/user_ratings">
+  Go back
+</a>
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
       User rating #<%= @user_rating.id %> details
     </h1>
-
-    <div class="row mb-3">
-      <div class="col">
-        <a href="/user_ratings" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-      </div>
-
-      <div class="col">
-        <a href="/delete_user_rating/<%= @user_rating.id %>" class="btn btn-block btn-outline-secondary">
-          Delete user rating
-        </a>
-      </div>
-    </div>
 
     <dl>
       <dt>
@@ -67,28 +56,50 @@
     </h2>
 
     <form action="/modify_user_rating/<%= @user_rating.id %>"  method="post" >
-      <div class="form-group">
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="user_id_from_query" class="form-control" value="<%= @user_rating.user_id %>">
-      </div>
+      <input type="hidden" id="wine_id_box" name="wine_id_from_query" class="form-control" value="<%= @user_rating.wine_id %>">
 
       <div class="form-group">
-        <label for="wine_id_box">
-          Wine
-        </label>
-
-        <input type="text" id="wine_id_box" name="wine_id_from_query" class="form-control" value="<%= @user_rating.wine_id %>">
-      </div>
-
-      <div class="form-group">
-        <label for="rating_box">
-          Rating
-        </label>
-
-        <input type="text" id="rating_box" name="rating_from_query" class="form-control" value="<%= @user_rating.rating %>">
+        <div class="row">
+          <%# 1 star %>
+          <span style="font-size: 0.75em;">
+            <input type="radio" id="1_stars" value="1" name="rating_from_query">
+              <label for="1_stars">
+                <i class="fas fa-star"></i>
+              </label>
+          </span>
+          &nbsp;&nbsp;
+          <%# 2 star %>
+          <span style="font-size: 0.75em;">
+            <input type="radio" id="2_stars" value="2" name="rating_from_query">
+              <label for="2_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+            </span>
+            &nbsp;&nbsp;
+          <%# 3 star %>
+          <span style="font-size: 0.75em;">
+            <input type="radio" id="3_stars" value="3" name="rating_from_query">
+              <label for="3_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </span>
+          &nbsp;&nbsp;
+          <%# 4 star %>
+          <span style="font-size: 0.75em;">
+            <input type="radio" id="4_stars" value="4" name="rating_from_query">
+              <label for="4_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </span>
+          &nbsp;&nbsp;
+          <%# 5 star %>
+          <span style="font-size: 0.75em;">
+            <input type="radio" id="5_stars" value="5" name="rating_from_query">
+              <label for="5_stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </label>
+          </span>
+        </div>
       </div>
 
       <button class="btn btn-block btn-outline-secondary">
@@ -99,3 +110,8 @@
 </div>
 
 <hr>
+<div class="col-md-8 offset-md-2">
+  <a href="/delete_user_rating/<%= @user_rating.id %>" class="btn btn-block btn-danger">
+    Delete user rating
+  </a>
+</div>

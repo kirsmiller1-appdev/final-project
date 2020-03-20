@@ -27,9 +27,9 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   match("/insert_user_comment", { :controller => "user_comments", :action => "create", :via => "post"})
           
   # READ
-  match("/user_comments", { :controller => "user_comments", :action => "index", :via => "get"})
+  match("/comments", { :controller => "user_comments", :action => "index", :via => "get"})
   
-  match("/user_comments/:id_from_path", { :controller => "user_comments", :action => "show", :via => "get"})
+  match("/comments/:id_from_path", { :controller => "user_comments", :action => "show", :via => "get"})
   
   # UPDATE
   
@@ -46,9 +46,9 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   match("/insert_user_rating", { :controller => "user_ratings", :action => "create", :via => "post"})
           
   # READ
-  match("/user_ratings", { :controller => "user_ratings", :action => "index", :via => "get"})
+  match("/ratings", { :controller => "user_ratings", :action => "index", :via => "get"})
   
-  match("/user_ratings/:id_from_path", { :controller => "user_ratings", :action => "show", :via => "get"})
+  match("/ratings/:id_from_path", { :controller => "user_ratings", :action => "show", :via => "get"})
   
   # UPDATE
   

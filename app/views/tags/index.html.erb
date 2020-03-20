@@ -11,28 +11,17 @@
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Wine
         </th>
 
         <th>
-          User
+          Author
         </th>
 
         <th>
           Tag
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
         </th>
 
         <th>
@@ -41,27 +30,17 @@
 
       <% @tags.each do |tag| %>
       <tr>
+
         <td>
-          <%= tag.id %>
+          <%= tag.wine_vintage %> <%= tag.wine_vineyard %> <%= tag.wine_blend %>
         </td>
 
         <td>
-          <%= tag.wine_id %>
-        </td>
-
-        <td>
-          <%= tag.user_id %>
+          <%= tag.author %>
         </td>
 
         <td>
           <%= tag.tag %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(tag.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(tag.updated_at) %> ago
         </td>
 
         <td>

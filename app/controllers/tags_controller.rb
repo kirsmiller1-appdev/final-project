@@ -9,6 +9,9 @@ class TagsController < ApplicationController
     the_id = params.fetch("id_from_path")
     @tag = Tag.where({:id => the_id }).at(0)
 
+    wine_id = @tag.fetch(:wine_id)
+    @wine = Wine.where({ :id => wine_id }).at(0)
+
     render({ :template => "tags/show.html.erb" })
   end
 
@@ -38,7 +41,6 @@ class TagsController < ApplicationController
     the_id = params.fetch("id_from_path")
     @tag = Tag.where({ :id => the_id }).at(0)
 
-    @tag.wine_id = params.fetch("wine_id_from_query")
     @tag.user_id = @current_user.id
     @tag.tag = params.fetch("tag_from_query")
 

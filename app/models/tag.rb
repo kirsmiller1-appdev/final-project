@@ -16,4 +16,28 @@ class Tag < ApplicationRecord
 
   validates :wine_id, :presence => true
   validates :user_id, :presence => true
+
+  def author
+    author_name = User.where({ :id => user_id}).at(0).fetch(:first_name)
+    return author_name
+  end
+
+  def wine_vintage
+    wine = Wine.where({ :id => wine_id}).at(0)
+    vintage = wine.fetch(:vintage)
+    return vintage
+  end
+
+  def wine_vineyard
+    wine = Wine.where({ :id => wine_id}).at(0)
+    vineyard = wine.fetch(:vineyard)
+    return vineyard
+  end
+
+  def wine_blend
+    wine = Wine.where({ :id => wine_id}).at(0)
+    blend = wine.fetch(:blend)
+    return blend
+  end
+  
 end

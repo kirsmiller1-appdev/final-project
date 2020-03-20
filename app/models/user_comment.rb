@@ -20,5 +20,24 @@ class UserComment < ApplicationRecord
     commenter = User.where({ :id => user_id }).at(0)
     name = commenter.first_name
     return name
-  end    
+  end
+
+  def wine_vintage
+    wine = Wine.where({ :id => wine_id}).at(0)
+    vintage = wine.fetch(:vintage)
+    return vintage
+  end
+
+  def wine_vineyard
+    wine = Wine.where({ :id => wine_id}).at(0)
+    vineyard = wine.fetch(:vineyard)
+    return vineyard
+  end
+
+  def wine_blend
+    wine = Wine.where({ :id => wine_id}).at(0)
+    blend = wine.fetch(:blend)
+    return blend
+  end
+
 end

@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      List of all user comments
+      List of all comments
     </h1>
   </div>
 </div>
@@ -15,11 +15,7 @@
     <table class="table">
       <tr>
         <th>
-          ID
-        </th>
-
-        <th>
-          User
+          Author
         </th>
 
         <th>
@@ -31,29 +27,19 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
       <% @user_comments.each do |user_comment| %>
       <tr>
+
+
         <td>
-          <%= user_comment.id %>
+          <%= user_comment.commenter_name %>
         </td>
 
         <td>
-          <%= user_comment.user_id %>
-        </td>
-
-        <td>
-          <%= user_comment.wine_id %>
+          <%= user_comment.wine_vintage %> <%= user_comment.wine_vineyard %> <%= user_comment.wine_blend %>
         </td>
 
         <td>
@@ -61,14 +47,7 @@
         </td>
 
         <td>
-          <%= time_ago_in_words(user_comment.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(user_comment.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/user_comments/<%= user_comment.id %>">
+          <a href="/comments/<%= user_comment.id %>">
             Show details
           </a>
         </td>
