@@ -25,6 +25,7 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
 
   # CREATE
   match("/insert_user_comment", { :controller => "user_comments", :action => "create", :via => "post"})
+  match("/insert_user_comment_wine", { :controller => "user_comments", :action => "create_wine", :via => "post"})
           
   # READ
   match("/comments", { :controller => "user_comments", :action => "index", :via => "get"})
@@ -44,6 +45,7 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
 
   # CREATE
   match("/insert_user_rating", { :controller => "user_ratings", :action => "create", :via => "post"})
+  match("/insert_user_rating_wine", { :controller => "user_ratings", :action => "create_wine", :via => "post"})
           
   # READ
   match("/ratings", { :controller => "user_ratings", :action => "index", :via => "get"})
@@ -63,6 +65,7 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
 
   # CREATE
   match("/insert_tag", { :controller => "tags", :action => "create", :via => "post"})
+  match("/insert_tag_wine", { :controller => "tags", :action => "create_wine", :via => "post"})
           
   # READ
   match("/tags", { :controller => "tags", :action => "index", :via => "get"})
@@ -127,6 +130,7 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   
   match("/modify_wine/:id_from_path", { :controller => "wines", :action => "update", :via => "post"})
   match("/edit_wine/:id_from_path", { :controller => "wines", :action => "edit", :via => "get"})
+  match("/feedback/:id_from_path", { :controller => "wines", :action => "feedback", :via => "get"})
   
   # DELETE
   match("/delete_wine/:id_from_path", { :controller => "wines", :action => "destroy", :via => "get"})

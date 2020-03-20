@@ -1,0 +1,108 @@
+<a href="/wines/<%= @wine.id %>">
+  Go back
+</a>
+    <%# Allow rating %>
+    <div class="col-md-8 offset-md-2">
+      <form action="/insert_user_rating_wine" method="post">
+        <label>
+          Rate
+        </label>
+        <input type="hidden" id="wine_id_box" name="wine_id_from_query" class="form-control" value=<%= @wine.id%>>
+        <div class="form-group">
+            <div class="row">
+              <%# 1 star %>
+              <span style="font-size: 0.75em;">
+                <input type="radio" id="1_stars" value="1" name="rating_from_query">
+                  <label for="1_stars">
+                    <i class="fas fa-star"></i>
+                  </label>
+              </span>
+              &nbsp;&nbsp;
+              <%# 2 star %>
+              <span style="font-size: 0.75em;">
+                <input type="radio" id="2_stars" value="2" name="rating_from_query">
+                  <label for="2_stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                  </label>
+                </span>
+                &nbsp;&nbsp;
+              <%# 3 star %>
+              <span style="font-size: 0.75em;">
+                <input type="radio" id="3_stars" value="3" name="rating_from_query">
+                  <label for="3_stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                  </label>
+              </span>
+              &nbsp;&nbsp;
+              <%# 4 star %>
+              <span style="font-size: 0.75em;">
+                <input type="radio" id="4_stars" value="4" name="rating_from_query">
+                  <label for="4_stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                  </label>
+              </span>
+              &nbsp;&nbsp;
+              <%# 5 star %>
+              <span style="font-size: 0.75em;">
+                <input type="radio" id="5_stars" value="5" name="rating_from_query">
+                  <label for="5_stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                  </label>
+              </span>
+            </div>
+          </div>
+
+          <button class="btn btn-block btn-outline-secondary">
+            Rate
+          </button>
+        </form>
+    </div>
+<hr>
+    <%# Allow tagging %>
+    <div class="col-md-8 offset-md-2">
+      <form action="/insert_tag_wine" method="post">
+        <div class="form-group">
+          <input type="hidden" id="wine_id_box" name="wine_id_from_query" class="form-control" value=<%= @wine.id%>>
+        </div>
+
+        <div class="form-group">
+          <label for="tag_box">
+            Add a tag
+          </label>
+
+          <select id="tag_box" name="tag_from_query" class="form-control">
+            <option value="cheap">cheap</option>
+            <option value="fancy">fancy</option>
+            <option value="red">red</option>
+            <option value="white">white</option>
+            <option value="sparkling">sparlking</option>
+            <option value="rose">rose</option>
+            <option value="dan">Dan</option>
+          </select>
+        </div>
+
+        <button class="btn btn-block btn-outline-secondary">
+          Create tag
+        </button>
+      </form>
+    </div>
+<hr>
+    <%# Allow commenting %>
+    <div class="col-md-8 offset-md-2">
+      <form action="/insert_user_comment_wine" method="post">
+        <input type="hidden" id="wine_id_box" name="wine_id_from_query" class="form-control" value=<%= @wine.id%>>
+
+        <div class="form-group">
+          <label for="comment_box">
+            Comment
+          </label>
+
+          <textarea id="comment_box" name="comment_from_query" class="form-control" rows="3"></textarea>
+        </div>
+
+        <button class="btn btn-block btn-outline-secondary">
+          Comment
+        </button>
+      </form>
+    </div>
+  </div>

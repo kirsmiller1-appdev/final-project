@@ -97,6 +97,13 @@ class WinesController < ApplicationController
     end
   end
 
+  def feedback
+    the_id = params.fetch("id_from_path")
+    @wine = Wine.where({:id => the_id }).at(0)
+
+    render({ :template => "wines/feedback.html.erb" })
+  end
+
   def edit
     the_id = params.fetch("id_from_path")
     @wine = Wine.where({:id => the_id }).at(0)

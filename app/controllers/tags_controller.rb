@@ -17,14 +17,18 @@ class TagsController < ApplicationController
 
   def create
     @inventory_id = params.fetch("inventory_id_from_query")
+    @wine_id = params.fetch("wine_id_from_query")
 
     tag_attempt = params.fetch("tag_from_query").to_s
 
     if tag_attempt.length == 0
       redirect_to("/inventories/"+@inventory_id, { :alert => "Tag failed to create successfully." })
-    else 
+    elsif Tag.where({ :wine_id => @wine_id }).where({ :tag => tag_attempt }).at(0).fetch(:id) != nil
+      # check if this wine already has this tag
+      redirect_to("/inventories/"+@inventory_id, { :alert => "This wine already has this tag" })
+    else
       @tag = Tag.new
-      @tag.wine_id = params.fetch("wine_id_from_query")
+      @tag.wine_id = @wine_id
       @tag.user_id = @current_user.id
       @tag.tag = params.fetch("tag_from_query")
 
@@ -33,6 +37,31 @@ class TagsController < ApplicationController
         redirect_to("/inventories/"+@inventory_id, { :notice => "Tag created successfully." })
       else
         redirect_to("/inventories/"+@inventory_id, { :alert => "Tag failed to create successfully." })
+      end
+    end
+  end
+
+  def create_wine
+    @wine_id = params.fetch("wine_id_from_query")
+
+    tag_attempt = params.fetch("tag_from_query").to_s
+
+    if tag_attempt.length == 0
+      redirect_to("/wines/"+@wine_id, { :alert => "Tag failed to create successfully." })
+    elsif Tag.where({ :wine_id => @wine_id }).where({ :tag => tag_attempt }).at(0).fetch(:id) != nil
+      # check if this wine already has this tag
+      redirect_to("/wines/"+@wine_id, { :alert => "This wine already has this tag" })
+    else 
+      @tag = Tag.new
+      @tag.wine_id = params.fetch("wine_id_from_query")
+      @tag.user_id = @current_user.id
+      @tag.tag = params.fetch("tag_from_query")
+
+      if @tag.valid?
+        @tag.save
+        redirect_to("/wines/"+@wine_id, { :notice => "Tag created successfully." })
+      else
+        redirect_to("/wines/"+@wine_id, { :alert => "Tag failed to create successfully." })
       end
     end
   end
