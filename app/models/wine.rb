@@ -48,6 +48,11 @@ class Wine < ApplicationRecord
     return tags_array
   end
 
+  def comments_array
+    comments_array = UserComment.where({ :wine_id => self.id })
+    return comments_array
+  end
+
   def available
     inventory_list = Inventory.where({ :wine_id => self.id }).all
     inventory_end_date = inventory_list.pluck(:end_date)

@@ -59,6 +59,22 @@ class WinesController < ApplicationController
     the_id = params.fetch("id_from_path")
     @wine = Wine.where({:id => the_id }).at(0)
 
+    inventory = Inventory.where({:wine_id => the_id })
+    @inventory_locations = inventory.pluck(:location)
+
+    @alive = @wine.available
+    
+    tags = Tag.where({ :wine_id => the_id })
+    @tags_count = tags.count
+    if @tags_count != 0
+      @tags = tags.pluck(:tag)
+    end
+
+    @avg_rating = @wine.avg_rating
+
+    @comments = @wine.comments_array
+    @comments_count = @comments.count
+
     render({ :template => "wines/show.html.erb" })
   end
 
@@ -79,6 +95,13 @@ class WinesController < ApplicationController
     else
       redirect_to("/wines", { :notice => "Wine failed to create successfully." })
     end
+  end
+
+  def edit
+    the_id = params.fetch("id_from_path")
+    @wine = Wine.where({:id => the_id }).at(0)
+
+    render({ :template => "wines/edit.html.erb" })
   end
 
   def update

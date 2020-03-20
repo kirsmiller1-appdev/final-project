@@ -1,0 +1,73 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit wine
+    </h2>
+
+    <form action="/modify_wine/<%= @wine.id %>"  method="post" >
+      <div class="form-group">
+        <label for="vintage_box">
+          Vintage
+        </label>
+
+        <input type="text" id="vintage_box" name="vintage_from_query" class="form-control" value="<%= @wine.vintage %>">
+      </div>
+
+      <div class="form-group">
+        <label for="vineyard_box">
+          Vineyard
+        </label>
+
+        <input type="text" id="vineyard_box" name="vineyard_from_query" class="form-control" value="<%= @wine.vineyard %>">
+      </div>
+
+      <div class="form-group">
+        <label for="blend_box">
+          Blend
+        </label>
+
+        <input type="text" id="blend_box" name="blend_from_query" class="form-control" value="<%= @wine.blend %>">
+      </div>
+
+      <div class="form-group">
+        <label for="expert_rating_box">
+          Expert rating
+        </label>
+
+        <input type="text" id="expert_rating_box" name="expert_rating_from_query" class="form-control" value="<%= @wine.expert_rating %>">
+      </div>
+
+      <div class="form-group">
+        <label for="expert_notes_box">
+          Expert notes
+        </label>
+
+        <textarea id="expert_notes_box" name="expert_notes_from_query" class="form-control" rows="3"><%= @wine.expert_notes %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="photo_url_box">
+          Photo url
+        </label>
+
+        <input type="text" id="photo_url_box" name="photo_url_from_query" class="form-control" value="<%= @wine.photo_url %>">
+      </div>
+
+      <div class="form-group">
+        <label for="external_url_box">
+          External url
+        </label>
+
+        <input type="text" id="external_url_box" name="external_url_from_query" class="form-control" value="<%= @wine.external_url %>">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update wine
+      </button>
+    </form>
+    <br>
+    <a href="/delete_wine/<%= @wine.id %>" class="btn btn-block btn-danger">
+    Delete wine
+    </a>
+  </div>
+</div>

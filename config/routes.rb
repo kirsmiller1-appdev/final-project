@@ -126,6 +126,7 @@ match("/", { :controller => "users", :action => "home", :via => "get"})
   # UPDATE
   
   match("/modify_wine/:id_from_path", { :controller => "wines", :action => "update", :via => "post"})
+  match("/edit_wine/:id_from_path", { :controller => "wines", :action => "edit", :via => "get"})
   
   # DELETE
   match("/delete_wine/:id_from_path", { :controller => "wines", :action => "destroy", :via => "get"})

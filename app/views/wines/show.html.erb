@@ -7,131 +7,120 @@
     <h1>
       <%= @wine.vintage %> <%= @wine.vineyard %> <%= @wine.blend %>
     </h1>
-
-    <div class="row mb-3">
-      <div class="col-md-8 offset-md-2">
-        <img src="<%= @wine.photo_url %>" height="250">
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Expert rating
-      </dt>
-      <dd>
-        <% if @wine.expert_rating == nil %>
-          <i>No expert rating</i>
-        <% else %>
-          <%= @wine.expert_rating %>
-        <% end %>
-      </dd>
-      
-
-      
-      <dt>
-        Expert notes
-      </dt>
-      <dd>
-        <% if @wine.expert_notes == nil %>
-          <i>No tasting notes</i>
-        <% else %>
-          <% if @wine.expert_notes.length < 1 %>
-            <i>No tasting notes</i>
-          <% else %>
-            <%= @wine.expert_notes %>
-          <% end %>
-        <% end %>
-      </dd>
-      
-      <% if @wine.external_url == nil %>
-      <% else %>
-        <% if @wine.external_url.length < 1 %>
-        <% else %>
-          <a href="<%= @wine.external_url %>">
-            More info
-          </a>
-        <% end %>
-      <% end %>
-
-    </dl>
   </div>
 </div>
-
-<hr>
-
 
 <div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <h2>
-      Edit wine
-    </h2>
-
-    <form action="/modify_wine/<%= @wine.id %>"  method="post" >
-      <div class="form-group">
-        <label for="vintage_box">
-          Vintage
-        </label>
-
-        <input type="text" id="vintage_box" name="vintage_from_query" class="form-control" value="<%= @wine.vintage %>">
-      </div>
-
-      <div class="form-group">
-        <label for="vineyard_box">
-          Vineyard
-        </label>
-
-        <input type="text" id="vineyard_box" name="vineyard_from_query" class="form-control" value="<%= @wine.vineyard %>">
-      </div>
-
-      <div class="form-group">
-        <label for="blend_box">
-          Blend
-        </label>
-
-        <input type="text" id="blend_box" name="blend_from_query" class="form-control" value="<%= @wine.blend %>">
-      </div>
-
-      <div class="form-group">
-        <label for="expert_rating_box">
-          Expert rating
-        </label>
-
-        <input type="text" id="expert_rating_box" name="expert_rating_from_query" class="form-control" value="<%= @wine.expert_rating %>">
-      </div>
-
-      <div class="form-group">
-        <label for="expert_notes_box">
-          Expert notes
-        </label>
-
-        <textarea id="expert_notes_box" name="expert_notes_from_query" class="form-control" rows="3"><%= @wine.expert_notes %></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="photo_url_box">
-          Photo url
-        </label>
-
-        <input type="text" id="photo_url_box" name="photo_url_from_query" class="form-control" value="<%= @wine.photo_url %>">
-      </div>
-
-      <div class="form-group">
-        <label for="external_url_box">
-          External url
-        </label>
-
-        <input type="text" id="external_url_box" name="external_url_from_query" class="form-control" value="<%= @wine.external_url %>">
-      </div>
-
-      <button class="btn btn-block btn-outline-secondary">
-        Update wine
-      </button>
-    </form>
+  <div class="col-md-4 offset-md-2">
+    <img src="<%= @wine.photo_url %>" height="250">
+  </div>
+  <div class="col-md-4">
+    <b>In your cellar?</b>
     <br>
-    <a href="/delete_wine/<%= @wine.id %>" class="btn btn-block btn-outline-secondary">
-    Delete wine
-    </a>
+    <% if @alive == true %>
+      <i style="font-size: 1.5em; color:green;" class="fas fa-check"></i>
+      <br>
+      <b>Location</b>: <%= @inventory_locations.to_sentence %>
+      <br>
+    <% else %>
+      <i style="font-size: 1.5em; color:#ed8780;" class="fas fa-minus-circle"></i>
+    <% end %>
   </div>
 </div>
 
-<hr>
+<%# Display info %>
+<br><br>
+<div>
+<%# User ratings info %>
+  <div class="row">
+    <div class="col-md-4 offset-md-2">
+      <% if @avg_rating == 0 %>
+        No rating
+        <% else %>
+          <% if @avg_rating == 5 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <% elsif @avg_rating >= 4 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 3 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 2 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @avg_rating >= 1 %>
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% else %>
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% end %>
+          <%= @avg_rating %>
+        <% end %>
+        <br>
+        <% if @tags_count != 0 %>
+          <% @wine.tags_array.each do |tag| %>
+            <p style="background-color:#5bc0de; display:inline; padding:.2em .6em .3em;font-size:75%;font-weight:700; line-height:1; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:.25em;">
+            <a href="/wines/tag/<%= tag.tag %>" style="color:#fff;">
+              <%= tag.tag %>
+            </a>
+            </p>
+            &nbsp;
+          <% end %>
+        <% else %>
+          No tags yet
+        <% end %>
+    </div>
+    <div class="col-md-6">
+        <b>Comments</b>
+      <br>
+        <% if @comments.count == 0 %>
+          No comments yet
+        <% else %>
+            <% @comments.each do |comment| %>
+              <%= comment.comment %> - <i><%= comment.commenter_name %></i>
+              <br>
+            <% end %>
+        <% end %>
+    </div>
+  </div>
+  <br>
+
+  <%# Expert info %>
+  <div class="row">
+    <div class="col-md-4 offset-md-2">
+        <b>Expert rating</b>
+      <br>
+        <% if @wine.expert_rating == nil %>
+          No expert rating
+        <% else %>
+          <% if @wine.expert_rating == 5 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <% elsif @wine.expert_rating >= 4 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          <% elsif @wine.expert_rating >= 3 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @wine.expert_rating >= 2 %>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% elsif @wine.expert_rating >= 1 %>
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% else %>
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          <% end %>
+          <%= @wine.expert_rating.to_f %>
+        <% end %>
+        <br>
+        <a href="<%= @wine.external_url %>">More info</a> <i class="fas fa-external-link-alt"></i>
+    </div>
+    <div class="col-md-6">
+        <b>Expert notes</b>
+      <br>
+        <%= @wine.expert_notes %>
+    </div>
+  </div>
+
+</div>
+
+<br><br>
+
+<div class="col-md-8 offset-md-2">
+  <a href="/edit_wine/<%= @wine.id %>" class="btn btn-block btn-outline-secondary">
+      Update wine
+  </a>
+</div>
+
